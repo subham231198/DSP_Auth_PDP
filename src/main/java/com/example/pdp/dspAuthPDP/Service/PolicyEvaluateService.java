@@ -87,8 +87,32 @@ public class PolicyEvaluateService {
                                 accountType,
                                 channel
                         );
-                logger.info("issued_JWT = {}", jwtToken);
-                return Map.of("issued_JWT", jwtToken);
+            case "SAML":
+                String saml_Assertion =
+                        samlTokenService.createSamlAssertion(
+                                tokenId,
+                                authLevel,
+                                customerId,
+                                sessionCorrelation,
+                                accountType,
+                                channel
+                        );
+                return Map.of("issued_SAML", saml_Assertion);
+
+            case "JWT":
+                String jwt_Token =
+                        JwtUtility.generateCustomerToken(
+                                tokenId,
+                                authLevel,
+                                Instant.now().toString(),
+                                Instant.now().plusSeconds(300).toString(),
+                                customerId,
+                                sessionCorrelation,
+                                accountType,
+                                channel
+                        );
+                logger.info("issued_JWT = {}", jwt_Token);
+                return Map.of("issued_JWT", jwt_Token);
 
             default:
                 throw new ResponseStatusException(
