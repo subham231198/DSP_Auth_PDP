@@ -61,7 +61,7 @@ public class PolicyEvaluateController
         {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Invalid header value x-channel!");
         }
-        if(!policy.getOutputTokenState().getToken_type().equals("SECPSAML") && !policy.getInputTokenState().getToken_type().equals("SECPJWT"))
+        if(!policy.getOutputTokenState().getToken_type().equals("SECPSAML") && !policy.getOutputTokenState().getToken_type().equals("SECPJWT"))
         {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid output_token_type!");
         }

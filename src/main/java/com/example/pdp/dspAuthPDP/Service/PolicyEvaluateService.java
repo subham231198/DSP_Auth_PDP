@@ -73,6 +73,7 @@ public class PolicyEvaluateService {
                                 accountType,
                                 channel
                         );
+                logger.info("issued_SAML = {}", samlAssertion);
                 return Map.of("issued_SAML", samlAssertion);
 
             case "SECPJWT":
@@ -87,6 +88,8 @@ public class PolicyEvaluateService {
                                 accountType,
                                 channel
                         );
+                logger.info("issued_JWT = {}", jwtToken);
+                return Map.of("issued_JWT", jwtToken);
             case "SAML":
                 String saml_Assertion =
                         samlTokenService.createSamlAssertion(
