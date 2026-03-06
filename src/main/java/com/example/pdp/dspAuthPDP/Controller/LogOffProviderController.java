@@ -7,10 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Map;
@@ -24,6 +21,7 @@ public class LogOffProviderController
     private static final Logger logger = LoggerFactory.getLogger(LogOffService.class);
 
     @PostMapping(value = "/dsp/v1/rest-sts/sessions-logout")
+    @CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
     public ResponseEntity<Map<String, Object>> logOffProvider(@RequestParam(value = "_action") String action, @RequestBody LogOffProvider logOffProvider)
     {
         if(!action.equals("translate"))
